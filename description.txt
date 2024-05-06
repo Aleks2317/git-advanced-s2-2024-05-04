@@ -1,0 +1,170 @@
+git blame index.html # просмотр сомитов и изменений
+
+d014a17c
+
+d014a17c (Daniil Pilipenko 2022-11-01 09:20:36 +0300 34)     <p class="fw-lighter">Введите текст в поле ниже, и система измерит и покажет его длину.</p>
+
+git checkout -b new_brench  # создать и перейти на ветку
+
+git revert d014a17c откатываемся до этого комита
+
+задача 2
+
+Найдите комит в котором в файле index.html был добавлен фрагмент class="fw-linghter"
+в строку 34 (используйте  команду git blame)  ->  git blame index.html *
+
+Перейдите в отдельную ветку (имя ветки придумайте самостоятельно) *
+
+Отмените изменения выполненные именно в данном комите. Для этого
+используйте команду git revert commit *
+
+Опишите суть изменений в сообщении комита (в отношении редактора vim) *
+
+Просмотрите получившийся комит и изменения в нем
+Отправте этот комит *
+
+
+git push origin --delete master  # удаление ветки
+
+1 После входа в консоли VIM нажимать курсором ничего нельзя
+    1 пишем изменения далее 'Esc' далее ':qw' 'enter'
+
+git revert d014a17c  # переходим на нужный комит (эта команда одновременно делает переход на комит и сам комит)
+git diff 8897d25 855115f # смотрим разницу комитов
+git push -u origin new_brench
+
+
+! Команда history выводит список всех команда
+
+PS C:\My_Python\GeekBrains\Контроль версий углублённо (GIT)\lesson_2\sem2\git-advanced-s2> history
+
+  Id CommandLine
+  -- -----------
+   1 try { . "c:\Users\AL\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\workbench\contrib\te...
+   2 git clone https://github.com/sortedmap/git-advanced-s2.git
+   3 cd .\git-advanced-s2\
+   4 git remote -v
+   5 git remote remove origin
+   6 git remote -v
+   7 git remote add originhttps://github.com/Aleks2317/git-advanced-s2-2024-05-04.git
+   8 git remote add origin https://github.com/Aleks2317/git-advanced-s2-2024-05-04.git
+   9 git remote -v
+  10 git branch --all
+  11 git branch -m main
+  12 git branch
+  13 git push -u original main
+  14 git push -u origin main
+  15 git blame index.html
+  16 git checkout -b new_brench
+  17 git status
+  18 git branch --all
+  19 git revert d014a17c
+  20 git log --oneline --graph --all
+  21 git diff 8897d25 855115f
+  22 git push -u origin task_1
+  23 git push -u origin new_branch
+  24 git push -u origin new_brench
+
+
+Vim (некоторые команды)
+# Нажатия кнопок
+ESC     — переход в командный режим
+i       — переход в режим редактирования текста
+ZQ (зажат Shift, поочередное нажатие) — выход без сохранения
+ZZ (зажат Shift, поочередное нажатие) — сохранить и выйти
+```bash
+# Нажатия кнопок
+ESC     — переход в командный режим
+i       — переход в режим редактирования текста
+ZQ (зажат Shift, поочередное нажатие) — выход без сохранения
+ZZ (зажат Shift, поочередное нажатие) — сохранить и выйти
+
+# Ввод в командном режиме
+:q!             — выйти без сохранения
+:wq             — сохранить файл и выйти
+:w filename.txt — сохранить файл как filename.txt
+
+
+задача 3
+
+Откройте файл ndex.html
+
+Найдите комит в котором была удалена функция подсчета колличества слов
+(countWords в фаеле main.js)  -> git blame main.js  в ней мы не нашли искомое
+                                 git log --oneline --graph --all
+                                 нашли несколько комитов, перебераем их в обратном порядке дабы найти нужный
+                                 c7e2f24 -> начнем с этого *
+
+Создайте новую ветку -> git checkout -b task3 : и автоматически перешли в нее *
+
+В новой ветке верниете обратно весбь функционал подсчета количества слов
+используйте команду git revert commit  -> git revert c7e2f24
+                                          git revert 560a300 *
+
+Убедитесь в браузере что функционал заработал: введите в поле текст, нажмите
+кнопку Подсчитать и убедитесь в том, что количество слов стало считаться *
+
+Отправте изменения в текущей ветке в удаленный репозиторий ->  git push origin task3 *
+
+влейте эти изменения и изменения из предыдущего задания в ветку master и также
+                -> git checkout main  : переходим в текущую ветку
+                -> git merge task3  : производим слияние с веткой мастер
+
+отпрвате в удаленный репозиторий  -> git push --all :сливаем все изменения в удаленный репозиторий *
+
+зайдите в удалелнный репозиторий и просмотрите историю комитов *
+
+history
+   4 git log --oneline --graph --all
+   5 git commit
+   6 git branch
+   7 cd .\git-advanced-s2\
+   8 git log
+   9 git log --oneline --graph --all
+  10 git checkout -b task3
+  11 git revert c7e2f24
+  12 git revert 560a300
+  13 git push -u task3
+  14 git push origin task3
+  15 git branch --all
+  16 git checkout main
+  17 git branch
+  18 git merge task3
+  19 git log --oneline --graph --all
+  20 git merge new_branch
+  21 git branch
+  22 git merge new_brench
+  23 git log --oneline --graph --all
+  24 git push --all
+
+
+задача 4
+в репозитории есть папка logs для хранения логов. И также есть файл .gitkeep,
+предназначеная для чтобы дериктория хранилась в репозитории
+
+выполните задание в ветке master (в моем случае main)
+
+удалите файл логов из репозитория и из отслеживания (git rm --cached)
+                -> в директории logs несколько файлов с расширением .log
+                -> git rm --cached logs\access.log  -> поочереди какбы удаляем их из гит
+                -> git rm --cached logs\error.log
+
+добавте их в файл .gitignore таким образом, чтобы папка и файл .getkeep не пропали из репозитория
+но новые файлы логов с любыми именами не отслеживались Git-ом
+                -> создаем файл .gitignore
+                -> прописываем в его папку logs/
+
+
+закончите изменения и отправте их в свой репозиторий
+                -> git add .
+                -> git commit -m
+
+history
+26 git rm --cached logs\access.log
+  27 git rm --cached logs\error.log
+  28 git status
+  29 git status
+  30 git status
+  31 git add .
+  32 git commit -m 'removed logs'
+  33 git push
